@@ -29,4 +29,12 @@ routes.post(
   }
 );
 
+routes.delete("/posts/:id", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  await post.delete();
+
+  return res.status(200).json({ msg: "Delete Successful" });
+});
+
 module.exports = routes;
