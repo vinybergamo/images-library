@@ -4,6 +4,12 @@ const multerConfig = require("../config/multer");
 
 const Post = require("../models/post");
 
+routes.get("/posts", async (req, res) => {
+  const posts = await Post.find();
+
+  return res.json(posts);
+});
+
 routes.post(
   "/api/upload",
   multer(multerConfig).single("file"),
