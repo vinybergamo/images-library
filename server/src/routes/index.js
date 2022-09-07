@@ -14,13 +14,16 @@ routes.post(
   "/api/upload",
   multer(multerConfig).single("file"),
   async (req, res) => {
-    const { originalname: name, size, key, location: url = ""} = req.file;
+    const { originalname: name, size, key, location: url = "" } = req.file;
+    const { title, description } = req.body;
     try {
       const post = await Post.create({
+        title,
+        description,
         name,
         size,
         key,
-        url
+        url,
       });
       res.status(200).json(post);
     } catch (error) {
